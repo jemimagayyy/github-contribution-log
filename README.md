@@ -1,17 +1,17 @@
-# Contribution [1]: [Arabic text displays LTR instead of RTL]
+# Contribution [1]: [Invalid documentation generated]
 
 **Contribution Number:** [1]  
-**Student:** Delight Nyanhete  
-**Issue:** [[GitHub issue link](https://github.com/stoatchat/for-web/issues/964)]  
+**TF:** Jemima Gay  
+**Issue:** [[GitHub issue link] (https://github.com/ponylang/ponyc/issues/1262).]
 **Status:** [Phase I Complete]
 
 ---
 
 ## Why I Chose This Issue
 
-This issue addresses a bug where Arabic text is being displayed left-to-right instead of right-to-left, breaking the reading experience for Arabic-speaking users. Text directionality is a fundamental part of internationalization. Getting it wrong makes the interface effectively unusable for that audience.
+I chose this issue within the ponyc repository because it offers a perfectly scoped entry point into open-source compiler tooling. It was specifically flagged as a "good first issue," which makes it an ideal for this project where understanding the codebase architecture is just as important as the implementation. Furthermore, the issue description explicitly notes that basic knowledge of C is required to navigate the documentation generation code. This presents a fantastic opportunity for me to apply and strengthen my programming skills within a real-world codebase.
 
-This is my very first open source contribution, and rather than let that be a reason to back out, I chose an issue that plays to my existing JavaScript and TypeScript experience while keeping the scope manageable. My real goal here isn't just the fix. I want to learn how to navigate an unfamiliar codebase, understand contribution workflows, and build the confidence to take on bigger issues next time.
+Beyond the technical alignment, I chose this issue because it has a clearly defined scope and a tangible impact on the Ponylang community. The bug causes arbitrary expressions and union expansions—such as = recover or call—to incorrectly leak into the generated documentation for default arguments. Because this "broken" state is well-documented with specific examples from the standard library, I have a clear baseline for reproducing the error locally and verifying my fix.
 
 ---
 
@@ -19,19 +19,19 @@ This is my very first open source contribution, and rather than let that be a re
 
 ### Problem Description
 
-According to the screenshots and help request, Arabic text in the application is being rendered left-to-right instead of right-to-left. Arabic is a RTL language, meaning the text direction and layout need to flow from right to left. Without this, the text appears in the wrong order and the interface becomes difficult or impossible to read for Arabic speakers. The issue also affects the settings page and some strings appear untranslated
+The ponyc documentation generator currently struggles to properly format complex expressions when they are used as default argument values. When a default argument relies on an expression or a union expansion (such as = recover or call), the generator incorrectly leaks these arbitrary code fragments into the final output. This results in confusioon, visual clutter, and inaccurate method signatures in the generated documentation.
 
 ### Expected Behavior
 
-Arabic text should render right-to-left across all parts of the interface, including the settings page. The layout and text alignment should respect RTL direction so the app is readable and usable for Arabic-speaking users.
+The documentation generator should accurately and cleanly represent default argument values in the generated method signatures. When a default argument uses a complex expression (such as a recover block or a negative numeric literal), the generator should parse and display the intended value without exposing internal compiler syntax or abstract syntax tree (AST) node names.
 
 ### Current Behavior
 
-Arabic text is displayed left-to-right, which reverses the natural reading direction. The settings page is also affected, and some UI strings are either missing translations or showing in the wrong language entirely
+Instead of displaying the actual default values, the documentation generator leaks internal compiler representations into the output. For example, a default argument containing a recover block displays as = recover at the end of the signature. Similarly, negative numeric literals (like -1) are incorrectly rendered as = call in the final documentation.
 
 ### Affected Components
 
-[Which parts of the codebase are involved?]
+This issue lies within the documentation generation module of the ponyc compiler, which is written in C. It specifically affects the AST (Abstract Syntax Tree) traversal and stringification logic responsible for formatting method signatures and default parameter values for the generated documentation.
 
 ---
 
