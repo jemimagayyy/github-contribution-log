@@ -39,13 +39,39 @@ This issue lies within the documentation generation module of the ponyc compiler
 
 ### Environment Setup
 
-[Notes on setting up your local development environment - challenges you faced, how you solved them]
+To reproduce this issue, I needed to build the ponyc compiler from source locally.
+
+Dependencies: I ensured I had the necessary build tools installed, including a C/C++ compiler (gcc or clang), make, cmake, and git. I also needed the development headers for pcre2 and the specific version of LLVM required by Ponylang.
+
+Challenges & Solutions: 
 
 ### Steps to Reproduce
 
-1. [Step 1]
-2. [Step 2]
-3. [Observed result]
+**1. Clone the repository and build the compiler:**
+```
+    git clone https://github.com/username/ponyc_ai301.git
+    cd ponyc_ai301
+    make
+```
+**2. Create a minimal reproduction file (main.pony):**
+
+Create a package with a method that uses a complex expression (like a negative number or a recover block) as a default argument:
+```
+  actor Main
+  new create(env: Env) =>
+    None
+
+  fun ref test_method(from: String = recover String end, to: USize = -1) =>
+    None
+```
+**3. Generate the documentation:**
+Run the locally built compiler with the --docs flag to generate documentation for the current directory:
+```
+  ./build/release/ponyc --docs
+```
+**5. Inspect the output (Observed result):**
+   
+Open the generated documentation file (usually found in a docs folder or output to the console depending on configuration) and view the signature for test_method. Instead of showing to: USize = -1 and from: String = recover String end, the documentation incorrectly renders internal AST nodes, outputting to: USize = call and from: String = recover.
 
 ### Reproduction Evidence
 
