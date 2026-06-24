@@ -48,7 +48,7 @@ Challenges & Solutions:
 ### Steps to Reproduce
 
 **1. Clone the repository and build the compiler:**
-```
+```bash
     git clone https://github.com/username/ponyc_ai301.git
     cd ponyc_ai301
     make
@@ -56,7 +56,7 @@ Challenges & Solutions:
 **2. Create a minimal reproduction file (main.pony):**
 
 Create a package with a method that uses a complex expression (like a negative number or a recover block) as a default argument:
-```
+```pony
   actor Main
   new create(env: Env) =>
     None
@@ -75,8 +75,7 @@ Open the generated documentation file (usually found in a docs folder or output 
 
 ### Reproduction Evidence
 
-- **Commit showing reproduction:** [Link to commit in your fork]
-- **Screenshots/logs:** [If applicable]
+- **Commit showing reproduction:** (https://github.com/jemimagayyy/ponyc_ai301.git)
 - **My findings:** [What you discovered during reproduction]
 
 ---
